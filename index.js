@@ -1,13 +1,11 @@
 'use strict'
 
+const normalize = require('normalize-for-search')
+
 
 
 const g = { // global patterns
-	  ß:      /ß/g
-	, ä:      /ä/g
-	, ö:      /ö/g
-	, ü:      /ü/g
-	, pl:     /\(pl\)/g
+	  pl:     /\(pl\)/g
 	, berlin: /\((berlin|bln)\)/g
 	, S:      /^s\s/
 	, U:      /^u\s/
@@ -27,14 +25,7 @@ const delimiter = /[\s\/\(\)\-,\.]+/
 const specialChars = /[^\w\s]|_/g
 const isNotEmpty = (x) => x.length > 0
 
-const tokenize = (station) => station
-	.toLowerCase()
-
-	// German umlauts
-	.replace(g.ß, 'ss')
-	.replace(g.ä, 'ae')
-	.replace(g.ö, 'oe')
-	.replace(g.ü, 'ue')
+const tokenize = (station) => normalize(station)
 
 	// expand abbreviations
 	.replace(g.pl,     'polen')
