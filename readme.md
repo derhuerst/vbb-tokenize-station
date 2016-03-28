@@ -5,6 +5,7 @@ Station names in [VBB](http://www.vbb.de) are terribly inconsistent and user's s
 - `S Südkreuz Bhf (Berlin)` -> `sbahn suedkreuz bahnhof berlin`
 - `S Beusselstr` -> `sbahn beussel strasse`
 - `S+U Warschauer Str.` -> `sbahn ubahn warschauer strasse`
+- `Charité - Campus Benjamin Franklin (Berlin)` -> `charite campus benjamin franklin berlin`
 
 [![npm version](https://img.shields.io/npm/v/vbb-tokenize-station.svg)](https://www.npmjs.com/package/vbb-tokenize-station)
 [![build status](https://img.shields.io/travis/derhuerst/vbb-tokenize-station.svg)](https://travis-ci.org/derhuerst/vbb-tokenize-station)

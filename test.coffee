@@ -1,8 +1,5 @@
 # todo:
-# Mühlberg (Elbe)
 # Rehfeld (EE), Bahnhof
-# Wolfen(Bitterfeld)
-# (bln), (berlin), (polen)
 
 tokenize = require './index.js'
 
@@ -56,14 +53,16 @@ module.exports =
 	# `strasse` (7 letters) yields in a pretty high relevance.
 	# `str` would probably not be collision-free enough.
 	'replaces `str.` suffixes by a new token `strasse`': (t) ->
-		r = tokenize 'S Beusselstr.'
-		t.ok 'beussel' in r
-		t.ok 'strasse' in r
+		r = tokenize 'Wiebestr./Huttenstr. (Berlin)'
+		t.ok 'wiebe' in r
+		t.ok 'hutten' in r
+		t.strictEqual r.filter((x) => x is 'strasse').length, 2
 		t.done()
 	'replaces `str` suffixes by a new token `strasse`': (t) ->
-		r = tokenize 'S Beusselstr'
-		t.ok 'beussel' in r
-		t.ok 'strasse' in r
+		r = tokenize 'Wiebestr/Huttenstr (Berlin)'
+		t.ok 'wiebe' in r
+		t.ok 'hutten' in r
+		t.strictEqual r.filter((x) => x is 'strasse').length, 2
 		t.done()
 	'replaces `str` by `strasse`': (t) ->
 		r = tokenize 'S+U Warschauer Str.'

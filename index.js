@@ -10,9 +10,9 @@ const g = { // global patterns
 	, S:      /^s\s/
 	, U:      /^u\s/
 	, SU:     /^s\+u\s/
-	, str:    /str([^\w]|$)/
-	, bhf:    /bhf([^\w]]$)/
-	, hbf:    /hbf\./
+	, str:    /str([^\w]|$)/g
+	, bhf:    /bhf([^\w]]$)/g
+	, hbf:    /hbf\./g
 }
 
 const l = { // local patterns
