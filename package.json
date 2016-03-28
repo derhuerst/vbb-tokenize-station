@@ -1,0 +1,13 @@
+{
+	"name":         "vbb-tokenize-station",
+	"description":  "Remove noise from VBB station names.",
+	"version":      "0.1.0",
+	"main":         "./index.js",
+	"files":        ["./index.js"],
+	"keywords":     ["vbb", "stations", "search", "url-safe", "slug"],
+	"author":       "Jannis R <mail@jannisr.de>",
+	"homepage":     "https://github.com/derhuerst/vbb-tokenize-station",
+	"repository":   "git://github.com/derhuerst/vbb-tokenize-station.git",
+	"license":      "ISC",
+	"engines":      {"node": ">=4"}
+}
