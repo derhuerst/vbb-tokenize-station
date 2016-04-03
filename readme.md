@@ -30,6 +30,8 @@ tokenize(S+U Warschauer Str.)
 .join(' ') // -> 'sbahn ubahn warschauer strasse'
 ```
 
+Called with no arguments or an invalid argument, `tokenize` will return `[]`.
+
 
 ## Contributing
 

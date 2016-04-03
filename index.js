@@ -25,7 +25,9 @@ const delimiter = /[\s\/\(\)\-,\.]+/
 const specialChars = /[^\w\s]|_/g
 const isNotEmpty = (x) => x.length > 0
 
-const tokenize = (station) => normalize(station)
+const tokenize = (station) => {
+	if ('string' !== typeof station || station.length === 0) return []
+	return normalize(station)
 
 	// expand abbreviations
 	.replace(g.pl,     'polen')
@@ -53,5 +55,6 @@ const tokenize = (station) => normalize(station)
 
 		.replace(specialChars, '')
 	)
+}
 
 module.exports = tokenize
