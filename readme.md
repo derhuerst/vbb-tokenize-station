@@ -11,8 +11,7 @@ Station names in [VBB](http://www.vbb.de) are terribly inconsistent and user's s
 [![build status](https://img.shields.io/travis/derhuerst/vbb-tokenize-station.svg)](https://travis-ci.org/derhuerst/vbb-tokenize-station)
 [![dependency status](https://img.shields.io/david/derhuerst/vbb-tokenize-station.svg)](https://david-dm.org/derhuerst/vbb-tokenize-station)
 [![dev dependency status](https://img.shields.io/david/dev/derhuerst/vbb-tokenize-station.svg)](https://david-dm.org/derhuerst/vbb-tokenize-station#info=devDependencies)
-
-*vbb-tokenize-station* [is ISC-licensed](license.md).
+![ISC-licensed](https://img.shields.io/github/license/derhuerst/vbb-tokenize-station.svg)
 
 
 ## Installing
@@ -26,7 +25,7 @@ npm install vbb-tokenize-station
 
 ```js
 const tokenize = require('vbb-tokenize-station')
-tokenize(S+U Warschauer Str.)
+tokenize('S+U Warschauer Str.')
 .join(' ') // -> 'sbahn ubahn warschauer strasse'
 ```
 
