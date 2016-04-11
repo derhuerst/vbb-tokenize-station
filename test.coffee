@@ -34,6 +34,14 @@ module.exports =
 		t.ok 'berlin' in tokenize 'Kastanienallee (Berlin)'
 		t.done()
 
+	'replaces `Bhf.` by `bahnhof`': (t) ->
+		t.ok 'bahnhof' in tokenize 'Bhf. Zoo'
+		t.done()
+
+	'replaces `Hbf.` by `hauptbahnhof`': (t) ->
+		t.ok 'hauptbahnhof' in tokenize 'Cottbus Hbf.'
+		t.done()
+
 	'replaces German umlauts': (t) ->
 		r = tokenize('S Südkreuz Bhf (Berlin)').join ''
 		t.ok r.match /ue/i
@@ -57,6 +65,16 @@ module.exports =
 		t.ok 'wiebe' in r
 		t.ok 'hutten' in r
 		t.strictEqual r.filter((x) => x is 'strasse').length, 2
+		t.done()
+	'replaces `strasse` suffixes by a new token `strasse`': (t) ->
+		r = tokenize 'Seestrasse'
+		t.ok 'see'     in r
+		t.ok 'strasse' in r
+		t.done()
+	'replaces `straße` suffixes by a new token `strasse`': (t) ->
+		r = tokenize 'Seestraße'
+		t.ok 'see'     in r
+		t.ok 'strasse' in r
 		t.done()
 	'replaces `str` suffixes by a new token `strasse`': (t) ->
 		r = tokenize 'Wiebestr/Huttenstr (Berlin)'
