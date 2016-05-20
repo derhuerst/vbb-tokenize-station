@@ -88,3 +88,14 @@ module.exports =
 		t.ok not ('str' in r)
 		t.ok not ('str.' in r)
 		t.done()
+
+	'replaces `b.` with `bei` if followed by a owrd': (t) ->
+		r = tokenize 'Petershagen (b. Berlin), Elbestr.'
+		t.ok 'bei' in r
+		t.ok not ('b' in r)
+		t.done()
+	'keeps `b`': (t) ->
+		r = tokenize 'Wehrhain, B 87'
+		t.ok 'b' in r
+		t.ok not ('bei' in r)
+		t.done()
