@@ -27,6 +27,7 @@ const tokenize = (station) =>
 	('string' !== typeof station || station.length === 0)
 	? []
 	: normalize(station)
+	.replace(/[\[\]]/g, ' ')
 	.replace(/(?:[^\w]|^)b\.(?=\s+\w+)/, 'bei ')
 	.split(delim)
 	.filter((x) => x.trim().length > 0)

@@ -9,6 +9,11 @@ module.exports =
 		t.strictEqual tokenize('Foo Bar Baz').length, 3
 		t.done()
 
+	'removes brackets': (t) ->
+		t.strictEqual tokenize('Foo Bar [Baz]').length, 3
+		t.strictEqual tokenize('Foo Bar [Baz]')[2], 'baz'
+		t.done()
+
 	'returns lower case tokens': (t) ->
 		r = tokenize 'Foo BAR baz'
 		t.strictEqual r[0], 'foo'
