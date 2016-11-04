@@ -12,6 +12,7 @@ Station names in [VBB](http://www.vbb.de) are terribly inconsistent and user's s
 [![dependency status](https://img.shields.io/david/derhuerst/vbb-tokenize-station.svg)](https://david-dm.org/derhuerst/vbb-tokenize-station)
 [![dev dependency status](https://img.shields.io/david/dev/derhuerst/vbb-tokenize-station.svg)](https://david-dm.org/derhuerst/vbb-tokenize-station#info=devDependencies)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/vbb-tokenize-station.svg)
+[![gitter channel](https://badges.gitter.im/derhuerst/vbb-rest.svg)](https://gitter.im/derhuerst/vbb-rest)
 
 
 ## Installing

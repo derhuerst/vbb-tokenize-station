@@ -9,7 +9,7 @@
 	"homepage":     "https://github.com/derhuerst/vbb-tokenize-station",
 	"repository":   "git://github.com/derhuerst/vbb-tokenize-station.git",
 	"license":      "ISC",
-	"engines":      {"node": ">=4"},
+	"engines":      {"node": ">=6"},
 	"dependencies": {
 		"normalize-for-search": "^2.0.1"
 	},
