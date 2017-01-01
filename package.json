@@ -14,13 +14,11 @@
 		"normalize-for-search": "^2.0.1"
 	},
 	"devDependencies": {
-		"coffee-script":        "^1.10",
-		"nodeunit":             "^0.10.2",
-		"watchy":               "^0.6.6"
+		"tape": "^4.6.3",
+		"tap-min": "derhuerst/tap-min"
 	},
 	"scripts": {
-		"test":          "nodeunit --reporter minimal test.coffee",
-		"test:watch":    "watchy -s -w . nodeunit --reporter minimal test.coffee",
-		"prepublish":    "npm test"
+		"test": "node test.js | tap-min",
+		"prepublish": "npm test"
 	}
 }
