@@ -31,17 +31,12 @@ const tokenize = (station) =>
 	.replace(/(?:[^\w]|^)b\.(?=\s+\w+)/, 'bei ')
 	.split(delim)
 	.filter((x) => x.trim().length > 0)
-	.map((x) => replace[x] || x)
-	.reduce((xs, x, i, all) => {
-		// expand suffixes
-		if (str.test(x))
-			xs.push(x.replace(str, ''), 'strasse')
-		else if (strasse.test(x))
-			xs.push(x.replace(strasse, ''), 'strasse')
-		else if (x === 'b' && all[i + 1] === 'berlin')
-			xs.push('bei')
-		else xs.push(x)
-		return xs
-	}, [])
+	.map((t) => {
+		return (replace[t] || t).replace(str, 'strasse').replace(strasse, 'strasse')
+	})
+	.map((t, i, all) => {
+		if (t === 'b' && all[i + 1] === 'berlin') return 'bei'
+		return t
+	})
 
 module.exports = tokenize

@@ -78,37 +78,26 @@ test('replaces German umlauts', (t) => {
 	t.notOk(d.join('').includes('ß'))
 })
 
-// todo: consider replacing by a single unicode char instead.
-// `strasse` (7 letters) yields in a pretty high relevance.
-// `str` would probably not be collision-free enough.
-test('replaces `str.` suffixes by a new token `strasse`', (t) => {
+test('replaces `str.` suffixes by `strasse`', (t) => {
 	t.plan(3)
 	const r = tokenize('Wiebestr./Huttenstr. (Berlin)')
-	t.ok(r.includes('wiebe'))
-	t.ok(r.includes('hutten'))
-	t.equal(r.filter((x) => x === 'strasse').length, 2)
+	t.ok(r.includes('wiebestrasse'))
+	t.ok(r.includes('huttenstrasse'))
+	t.notOk(r.includes('strasse'))
 })
 
-test('replaces `strasse` suffixes by a new token `strasse`', (t) => {
-	t.plan(2)
-	const r = tokenize('Seestrasse')
-	t.ok(r.includes('see'))
-	t.ok(r.includes('strasse'))
-})
-
-test('replaces `straße` suffixes by a new token `strasse`', (t) => {
-	t.plan(2)
+test('replaces `straße` suffixes by `strasse`', (t) => {
+	t.plan(1)
 	const r = tokenize('Seestraße')
-	t.ok(r.includes('see'))
-	t.ok(r.includes('strasse'))
+	t.ok(r.includes('seestrasse'))
 })
 
 test('replaces `str` suffixes by a new token `strasse`', (t) => {
 	t.plan(3)
 	const r = tokenize('Wiebestr/Huttenstr (Berlin)')
-	t.ok(r.includes('wiebe'))
-	t.ok(r.includes('hutten'))
-	t.equal(r.filter((x) => x === 'strasse').length, 2)
+	t.ok(r.includes('wiebestrasse'))
+	t.ok(r.includes('huttenstrasse'))
+	t.notOk(r.includes('strasse'))
 })
 
 test('replaces `str` by `strasse`', (t) => {
