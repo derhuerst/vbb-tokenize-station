@@ -1,7 +1,7 @@
 {
 	"name":         "vbb-tokenize-station",
 	"description":  "Make VBB station names search-safe.",
-	"version":      "0.2.1",
+	"version":      "0.3.0",
 	"main":         "index.js",
 	"files":        ["index.js"],
 	"keywords":     ["vbb", "stations", "search", "url-safe", "slug"],
@@ -15,7 +15,7 @@
 	},
 	"devDependencies": {
 		"tape": "^4.6.3",
-		"tap-min": "derhuerst/tap-min"
+		"tap-min": "^1.2.1"
 	},
 	"scripts": {
 		"test": "node test.js | tap-min",
