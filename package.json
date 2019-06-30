@@ -1,21 +1,23 @@
 {
-	"name":         "vbb-tokenize-station",
+	"name":         "tokenize-vbb-station-name",
 	"description":  "Make VBB station names search-safe.",
 	"version":      "0.3.0",
 	"main":         "index.js",
 	"files":        ["index.js"],
 	"keywords":     ["vbb", "stations", "search", "url-safe", "slug"],
 	"author":       "Jannis R <mail@jannisr.de>",
-	"homepage":     "https://github.com/derhuerst/vbb-tokenize-station",
-	"repository":   "git://github.com/derhuerst/vbb-tokenize-station.git",
+	"homepage":     "https://github.com/derhuerst/tokenize-vbb-station-name",
+	"repository":   "git://github.com/derhuerst/tokenize-vbb-station-name.git",
 	"license":      "ISC",
-	"engines":      {"node": ">=6"},
+	"engines": {
+		"node": ">=8"
+	},
 	"dependencies": {
 		"normalize-for-search": "^2.0.1"
 	},
 	"devDependencies": {
-		"tape": "^4.6.3",
-		"tap-min": "^1.2.1"
+		"tap-min": "^2.0.0",
+		"tape": "^4.6.3"
 	},
 	"scripts": {
 		"test": "node test.js | tap-min",
