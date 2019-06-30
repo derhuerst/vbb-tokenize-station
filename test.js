@@ -1,10 +1,7 @@
 'use strict'
 
 const test = require('tape')
-
 const tokenize = require('.')
-
-
 
 test('splits by spaces', (t) => {
 	t.plan(2)

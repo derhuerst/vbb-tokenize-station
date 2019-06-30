@@ -1,8 +1,8 @@
 {
-	"name":         "tokenize-vbb-station-name",
-	"description":  "Make VBB station names search-safe.",
-	"version":      "1.0.0",
-	"main":         "index.js",
+	"name": "tokenize-vbb-station-name",
+	"description": "Make VBB station names search-safe.",
+	"version": "1.0.0",
+	"main": "index.js",
 	"files": [
 		"index.js"
 	],
@@ -13,10 +13,10 @@
 		"url-safe",
 		"slug"
 	],
-	"author":       "Jannis R <mail@jannisr.de>",
-	"homepage":     "https://github.com/derhuerst/tokenize-vbb-station-name",
-	"repository":   "git://github.com/derhuerst/tokenize-vbb-station-name.git",
-	"license":      "ISC",
+	"author": "Jannis R <mail@jannisr.de>",
+	"homepage": "https://github.com/derhuerst/tokenize-vbb-station-name",
+	"repository": "git://github.com/derhuerst/tokenize-vbb-station-name.git",
+	"license": "ISC",
 	"engines": {
 		"node": ">=8"
 	},
