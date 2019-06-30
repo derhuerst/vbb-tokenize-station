@@ -119,3 +119,19 @@ test('keeps plain `b`', (t) => {
 	t.ok(r.includes('b'))
 	t.notOk(r.includes('bei'))
 })
+
+test('respects opt.meta', (t) => {
+	t.plan(3)
+	const r1 = tokenize('S+U AAA-Str.', {meta: 'expand'})
+	t.deepEqual(r1, ['sbahn', 'ubahn', 'aaa', 'strasse'])
+	const r2 = tokenize('S+U AAA-Str.', {meta: 'remove'})
+	t.deepEqual(r2, ['aaa', 'strasse'])
+	const r3 = tokenize('S+U AAA-Str.', {meta: null})
+	t.deepEqual(r3, ['s', 'u', 'aaa', 'strasse'])
+})
+
+test('respects opt.expansions', (t) => {
+	t.plan(1)
+	const r = tokenize('S+U Warschauer Str.', {expansions: {}})
+	t.deepEqual(r, ['s', 'u', 'warschauer', 'str'])
+})
