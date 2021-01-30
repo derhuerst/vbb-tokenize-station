@@ -5,7 +5,8 @@
 	"version": "2.0.0",
 	"main": "index.js",
 	"files": [
-		"index.js"
+		"index.js",
+		"lib"
 	],
 	"keywords": [
 		"vbb",
@@ -22,6 +23,8 @@
 		"node": ">=12"
 	},
 	"dependencies": {
+		"german-license-plate-prefixes": "^2.15.0",
+		"moo": "^0.5.1"
 	},
 	"devDependencies": {
 		"benchmark": "^2.1.4",
