@@ -1,38 +1,28 @@
-# tokenize-vbb-station-name
+# parse-vbb-station-name
 
-Station names in [VBB](http://www.vbb.de) are terribly inconsistent and user's search queries are not perfect either. This module tries to compensate all the weird edge cases:
+Station names in [VBB](https://en.wikipedia.org/wiki/Verkehrsverbund_Berlin-Brandenburg)/[BVG](https://en.wikipedia.org/wiki/Berliner_Verkehrsbetriebe) data are terribly inconsistent, cluttered with abbreviations, phrases to tell identically named places apart, and unhelpful suffixes like `, Bahnhof`. **`parse-vbb-station-name` tries to parse those names into a meaningful structure**.
 
-- `S Südkreuz Bhf (Berlin)` -> `sbahn suedkreuz bahnhof berlin`
-- `S Beusselstr` -> `sbahn beussel strasse`
-- `S+U Warschauer Str.` -> `sbahn ubahn warschauer strasse`
-- `Charité - Campus Benjamin Franklin (Berlin)` -> `charite campus benjamin franklin berlin`
-
-[![npm version](https://img.shields.io/npm/v/tokenize-vbb-station-name.svg)](https://www.npmjs.com/package/tokenize-vbb-station-name)
-[![build status](https://img.shields.io/travis/derhuerst/tokenize-vbb-station-name.svg)](https://travis-ci.org/derhuerst/tokenize-vbb-station-name)
-![ISC-licensed](https://img.shields.io/github/license/derhuerst/tokenize-vbb-station-name.svg)
-[![gitter channel](https://badges.gitter.im/derhuerst/vbb-rest.svg)](https://gitter.im/derhuerst/vbb-rest)
-[![support me on Patreon](https://img.shields.io/badge/support%20me-on%20patreon-fa7664.svg)](https://patreon.com/derhuerst)
+[![npm version](https://img.shields.io/npm/v/parse-vbb-station-name.svg)](https://www.npmjs.com/package/parse-vbb-station-name)
+![ISC-licensed](https://img.shields.io/github/license/derhuerst/parse-vbb-station-name.svg)
+![minimum Node.js version](https://img.shields.io/node/v/parse-vbb-station-name.svg)
+[![support me via GitHub Sponsors](https://img.shields.io/badge/support%20me-donate-fa7664.svg)](https://github.com/sponsors/derhuerst)
+[![chat with me on Twitter](https://img.shields.io/badge/chat%20with%20me-on%20Twitter-1da1f2.svg)](https://twitter.com/derhuerst)
 
 
 ## Installing
 
 ```shell
-npm install tokenize-vbb-station-name
+npm install parse-vbb-station-name
 ```
 
 
 ## Usage
 
 ```js
-const tokenize = require('tokenize-vbb-station-name')
-
-tokenize('S+U Warschauer Str.')
-.join(' ') // -> 'sbahn ubahn warschauer strasse'
+// todo
 ```
-
-Called with no arguments or an invalid argument, `tokenize` will return `[]`.
 
 
 ## Contributing
 
-If you have a question, found a bug or want to propose a feature, have a look at [the issues page](https://github.com/derhuerst/tokenize-vbb-station-name/issues).
+If you have a question or need support using `parse-vbb-station-name`, please double-check your code and setup first. If you think you have found a bug or want to propose a feature, use [the issues page](https://github.com/derhuerst/parse-vbb-station-name/issues).

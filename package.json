@@ -1,36 +1,36 @@
 {
-	"name": "tokenize-vbb-station-name",
-	"description": "Make VBB station names search-safe.",
-	"version": "1.1.0",
+	"private": true,
+	"name": "parse-vbb-station-name",
+	"description": "Parse VBB stop/station names.",
+	"version": "2.0.0",
 	"main": "index.js",
 	"files": [
 		"index.js"
 	],
 	"keywords": [
 		"vbb",
+		"stops",
 		"stations",
-		"search",
-		"url-safe",
-		"slug"
+		"parse",
+		"parser"
 	],
 	"author": "Jannis R <mail@jannisr.de>",
-	"homepage": "https://github.com/derhuerst/tokenize-vbb-station-name",
-	"repository": "git://github.com/derhuerst/tokenize-vbb-station-name.git",
+	"homepage": "https://github.com/derhuerst/parse-vbb-station-name",
+	"repository": "git://github.com/derhuerst/parse-vbb-station-name.git",
 	"license": "ISC",
 	"engines": {
-		"node": ">=8"
+		"node": ">=12"
 	},
 	"dependencies": {
-		"normalize-for-search": "^2.0.1"
 	},
 	"devDependencies": {
 		"benchmark": "^2.1.4",
-		"tap-min": "^2.0.0",
-		"tape": "^4.6.3"
+		"eslint": "^7.18.0"
 	},
 	"scripts": {
-		"test": "node test.js | tap-min",
+		"lint": "eslint --ignore-path .gitignore .",
+		"test": "node test/index.js",
 		"benchmark": "env NODE_ENV=production node benchmark.js",
-		"prepublish": "npm test"
+		"prepublish": "npm run lint && npm test"
 	}
 }
