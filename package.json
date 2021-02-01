@@ -24,11 +24,13 @@
 		"normalize-for-search": "^2.0.1"
 	},
 	"devDependencies": {
+		"benchmark": "^2.1.4",
 		"tap-min": "^2.0.0",
 		"tape": "^5.0.0"
 	},
 	"scripts": {
 		"test": "node test.js | tap-min",
+		"benchmark": "env NODE_ENV=production node benchmark.js",
 		"prepublish": "npm test"
 	}
 }
