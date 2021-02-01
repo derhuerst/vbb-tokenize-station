@@ -24,7 +24,8 @@
 	},
 	"dependencies": {
 		"german-license-plate-prefixes": "^2.15.0",
-		"moo": "^0.5.1"
+		"moo": "^0.5.1",
+		"nearley": "^2.20.1"
 	},
 	"devDependencies": {
 		"benchmark": "^2.1.4",
@@ -32,8 +33,9 @@
 	},
 	"scripts": {
 		"lint": "eslint --ignore-path .gitignore .",
+		"build": "nearleyc lib/grammar.ne -o lib/grammar.js",
 		"test": "node test/index.js",
 		"benchmark": "env NODE_ENV=production node benchmark.js",
-		"prepublish": "npm run lint && npm test"
+		"prepublish": "npm run lint && npm run build && npm test"
 	}
 }

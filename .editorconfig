@@ -19,3 +19,8 @@ indent_size = 4
 [**.{yml,yaml}]
 indent_style = spaces
 indent_size = 2
+
+# Use spaces in Nearly grammars.
+[**.ne]
+indent_style = spaces
+indent_size = 2
