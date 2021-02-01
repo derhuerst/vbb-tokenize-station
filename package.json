@@ -29,13 +29,15 @@
 	},
 	"devDependencies": {
 		"benchmark": "^2.1.4",
-		"eslint": "^7.18.0"
+		"eslint": "^7.18.0",
+		"split2": "^3.2.2"
 	},
 	"scripts": {
 		"lint": "eslint --ignore-path .gitignore .",
 		"build": "nearleyc lib/grammar.ne -o lib/grammar.js",
 		"test": "node test/index.js",
+		"test-parse-all": "cat test/vbb-stations.ndjson.gz | gunzip | node test/parse.js",
 		"benchmark": "env NODE_ENV=production node benchmark.js",
-		"prepublish": "npm run lint && npm run build && npm test"
+		"prepublishOnly": "npm run lint && npm run build && npm test && npm run test-parse-all"
 	}
 }
