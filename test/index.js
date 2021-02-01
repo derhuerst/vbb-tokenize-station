@@ -1,9 +1,8 @@
 'use strict'
 
 const {inspect} = require('util')
-const {Parser, Grammar} = require('nearley')
 const lexer = require('../lib/lexer')
-const grammar = require('../lib/grammar')
+const parse = require('..')
 const cases = require('./cases')
 
 for (const [id, name] of cases) {
@@ -14,20 +13,6 @@ for (const [id, name] of cases) {
 		console.log('  ', type, inspect(value, {colors: true}))
 	}
 
-	const parser = new Parser(Grammar.fromCompiled(grammar))
-	parser.feed(name)
-	parser.finish()
-
-	if (parser.results.length === 0) {
-		const err = new Error(`no parse results with ${id} "${name}"`)
-		err.results = parser.results
-		throw err
-	}
-	if (parser.results.length > 1) {
-		const err = new Error(`grammar is ambiguous with ${id} "${name}"`)
-		err.results = parser.results
-		throw err
-	}
-
-	console.log(inspect(parser.results[0], {depth: null, colors: true})) // todo: indent
+	const res = parse(name)
+	console.log(inspect(res, {depth: null, colors: true})) // todo: indent
 }
