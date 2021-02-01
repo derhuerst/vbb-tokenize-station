@@ -1,22 +1,16 @@
 'use strict'
 
 const {Suite} = require('benchmark')
+const testCases = require('./test/cases')
 const parse = require('.')
 
-const names = [
-	// todo
-]
+const names = testCases.map(([id, name]) => name)
 
 new Suite()
 
 .add(`parse ${names.length} names`, () => {
 	for (let i = 0; i < names.length; i++) {
-		const name = names[i]
-
-		const idx = Math.round(Math.random() * name.length)
-		const randomStr = Math.random().toString(16).slice(2, 8)
-		const spliced = name.slice(0, idx) + randomStr + name.slice(idx)
-		parse(spliced)
+		parse(names[i])
 	}
 })
 

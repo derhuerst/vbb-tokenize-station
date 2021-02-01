@@ -1,0 +1,100 @@
+'use strict'
+
+const testCases = [
+	['900048101', 'S Grunewald (Berlin)'],
+	['900041102', 'U Blissestr. (Berlin)'],
+	['900078272', 'S+U Neukölln (Berlin)'],
+
+	['900078272', 'S+U Neukölln (Berlin) [U7]'],
+	['900110728', 'Michelangelostr. (Berlin) [Bushafen]'],
+	['900058103', 'S+U Yorckstr. S2 S25 S26 U7 (Berlin)'],
+	['900150011', 'Hohenschönhauser Str. [1-2] (Berlin)'],
+	['900100731', 'S+U Alexanderpl/Memhardstr.[4-5]'],
+
+	['900100722', 'S+U Potsdamer Platz (Bln) [Bus Stresemannstr.]'],
+	['900160733', 'Münsterlandplatz (Berlin) [Ri.S+U Lichtenberg]'],
+	['900552032', 'Schwerin Süd (STR/Bus)'],
+	['900553120', 'Ausbau (Autobahn), Upahl'],
+	['900552158', 'Warnitz (Bus), Schwerin (Meckl)'],
+
+	['900470000', 'Cottbus, Hauptbahnhof'],
+	['900810019', 'Wroclaw (PL), Glowny'],
+	['900810023', 'Zielona Gora (PL), Bahnhof'],
+	['900100001', 'S+U Friedrichstr. Bhf (Berlin)'],
+
+	['900001103', 'Wiebestr./Huttenstr. (Berlin)'],
+	['900110713', 'Prenzlauer Allee/ Ostseestr. (Berlin)'],
+	['900191702', 'Sonnenallee /Baumschulenstr. (Berlin)'],
+
+	['900552209', 'H.-J.-P. Lemm Str., Boizenburg (Elbe)'],
+
+	['900320638', 'Petershagen (b. Berlin), W.-Pieck-Str./Schule'],
+	['900261992', 'Waldow (bei Brand), Waldstr.'],
+	['900550062', 'Burg (bei Magdeburg), Bahnhof'],
+	['900341270', 'Wilmersdorf (bei Angermünde), Bahnhof'],
+	['900220306', 'Buchholz (bei Treuenbrietzen), Bahnhof'],
+	['900350715', 'Stolzenhagen (bei Wandlitz), Kirche'],
+	['900245070', 'Birkenhain (Heinersdorf)'],
+	[  '8010318', 'Schönebeck(Elbe)'],
+	['900275626', 'Göttin (Brandenburg)'],
+	['900220211', 'Rietz (bei Brandenburg), Dorf'],
+	['900220215', 'Grebs (bei Lehnin)'],
+	['900310980', 'Petersdorf (bei Fürstenwalde), Am Fuchsbau'],
+	['900360015', 'Frankfurt (Oder), Anger'],
+	['900310614', 'Buckow (bei Beeskow), Bahnhof'],
+	['900320601', 'Eggersdorf (Strausberg), Schule'],
+	['900550324', 'Coswig (Anhalt), Bahnhof'],
+	['900222139', 'Neuendorf (bei Niemegk)'],
+	['900553095', 'Bülow (b Schwerin)'],
+	['900222111', 'Kranepuhl (bei Bad Belzig)'],
+	['900553093', 'Runow, Bülow b Schwerin (Meckl)'],
+	['900557423', 'Dambeck (b LWL)'],
+	['900435661', 'Naundorf (bei Vetschau), Ortsmitte'],
+	['900470161', 'Cottbus, Görlitzer Str. (Nord)'],
+	['900470193', 'Cottbus, Görlitzer Str. (West)'],
+	['900470332', 'Cottbus, Görlitzer Str. (Süd)'],
+	['900550430', 'Naumburg(Saale), Hauptbahnhof'],
+	['900560011', 'Lauterbach(Rügen)'],
+
+	['900559794', 'Lauterbach(Rüg) Mole'],
+	['900171701', 'U Elsterwerdaer Platz (Berlin) Bus Köpenicker S.'],
+	['8070003', 'Frankfurt(M) Flughafen Fernbf'],
+
+	['900552899', 'Penzlin (b Lübz), Gallin-Kuppentin'],
+
+	['900552460', 'B5, Redefin'],
+	['900215454', 'Karstädt (PR), B 5'],
+	['900260421', 'Duben, B 87'],
+
+	['900210521', 'Ketzin (Havel), Baumschule'],
+	['900205663', 'Wusterhausen (Dosse), Bahnhof'],
+	['900550235', 'Blankensee(Meckl), Bahnhof'],
+	['900261873', 'Schönwalde (Spreewald), Schule'],
+	['900203512', 'Schönfließ (OHV), Bieselheide'],
+	['900245027', 'S Blankenfelde (TF) Bhf'],
+	['900310005', 'Berkenbrück (LOS), Bahnhof'],
+	['900310007', 'Jacobsdorf (Mark), Bahnhof'],
+	['900220004', 'Seddin (PM), Bahnhof'],
+	['900215455', 'Karstädt (PR), Bahnhof'],
+	[  '8000252', 'Minden(Westf)'],
+	['900340003', 'Pinnow (UM), Bahnhof'],
+	['900350529', 'Krummensee (BAR), Dorf'],
+	['900320274', 'Herzfelde (MOL), Kirche'],
+	['900261082', 'Schulzendorf (LDS), Kita'],
+	['900445956', 'Kunersdorf (SPN), Bahnhof'],
+	['900560110', 'Friedrichsruhe(Meck)'],
+	['900552672', 'Niendorf(b PCH), Groß Niendorf (Meckl.)'],
+	['900552155', 'Rahlstedter Str./Gadebebuscher Str., Schwerin (Me'],
+	['900552438', 'Abzw. n Schossin, Warsow b Schwerin (Meckl)'],
+	['900553022', 'Pampow Stralendorfer Str., Pampow b Schwerin (Meck'],
+	['900552306', 'Kölzin (b Hagenow), Kogel b Zarrentin (Meckl)'],
+
+	['900550024', 'Weißwasser (Oberlausitz), Bahnhof'],
+	['900550406', 'Fürth(Bay), Hauptbahnhof'],
+
+	['900809012', 'Decin hl.n.'],
+
+	['900275330', 'Brandenburg, Görden Bhf, EKZ'],
+]
+
+module.exports = testCases
