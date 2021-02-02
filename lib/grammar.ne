@@ -1,6 +1,12 @@
 @{%
 const lexer = require('./lexer')
 
+const _id = ([token]) => ({
+	type: token.type,
+	text: token.text,
+	offset: token.offset,
+})
+
 const collapseText = (tokens) => {
 	return {
 		type: 'text',
@@ -9,11 +15,29 @@ const collapseText = (tokens) => {
 	}
 }
 
+const asDifferentiator = (token) => ({
+	type: 'differentiator',
+	text: token.text,
+	offset: token.offset,
+})
+
 const combineAtNotation = (tokens, raw) => ({
 	type: 'differentiator',
 	text: tokens.filter(t => !!t).map(t => t.text).join(''),
 	offset: tokens[0].offset,
 	raw,
+})
+
+const asSbahnUbahn = ([sU]) => ({
+	type: 'sbahnUbahn',
+	text: sU.text,
+	offset: sU.offset,
+})
+
+const asLine = ([line]) => ({
+	type: 'line',
+	text: line.text,
+	offset: line.offset,
 })
 %}
 @lexer lexer
@@ -29,8 +53,8 @@ exp ->
 	# 900557423 "Dambeck (b LWL)"
 	# 900180020 "S.-Allende-Str./Wendenschloßstr. (Berlin)"
  	| text _ differentiator {%
-		([name, _, diffs]) => ({
-			name, differentiators: diffs,
+		([name, _, diff]) => ({
+			name, differentiators: [diff],
 		})
 	%}
 	# 900470000 "Cottbus, Hauptbahnhof"
@@ -44,46 +68,46 @@ exp ->
 	# 900320601 "Eggersdorf (Strausberg), Schule"
 	# 900310614 "Buckow (bei Beeskow), Bahnhof"
 	| text _ differentiator %comma:? _ text {%
-		([group, _, groupDiffs, __, ___, name]) => ({
+		([group, _, groupDiff, __, ___, name]) => ({
 			name,
-			group: {...group, differentiators: groupDiffs},
+			group: {...group, differentiators: [groupDiff]},
 		})
 	%}
 	# 900171701 "U Elsterwerdaer Platz (Berlin) Bus Köpenicker S."
 	| sbahnUbahn _ text _ differentiator _ words {%
-		([sbahnUbahn, _, name, __, diffs, ___, part]) => ({
+		([sbahnUbahn, _, name, __, diff, ___, part]) => ({
 			sbahnUbahn,
-			name, differentiators: diffs,
-			part,
+			name, differentiators: [diff],
+			part: [part],
 		})
 	%}
 	# todo: reverse group & name?
 	# 900552672 "Niendorf(b PCH), Groß Niendorf (Meckl.)"
 	| text _ differentiator %comma _ text _ differentiator {%
-		([group, _, groupDiffs, __, ___, name, ____, diffs]) => ({
-			name, differentiators: diffs,
-			group: {...group, differentiators: groupDiffs},
+		([group, _, groupDiff, __, ___, name, ____, diff]) => ({
+			name, differentiators: [diff],
+			group: {...group, differentiators: [groupDiff]},
 		})
 	%}
 	# todo: reverse group & name?
 	# 900552306 "Kölzin (b Hagenow), Kogel b Zarrentin (Meckl)"
 	| text _ differentiator %comma _ text _ differentiator _ differentiator {%
-		([group, _, groupDiffs, __, ___, name, ____, diff1, _____, diff2]) => ({
+		([group, _, groupDiff, __, ___, name, ____, diff1, _____, diff2]) => ({
 			name, differentiators: [diff1, diff2],
-			group: {...group, differentiators: groupDiffs},
+			group: {...group, differentiators: [groupDiff]},
 		})
 	%}
 	# 900310020 "Schöneiche (bei Berlin), Lübecker Str. [Endstelle]"
 	| text _ differentiator %comma _ text _ part {%
-		([group, _, groupDiffs, __, ___, name, ____, part]) => ({
+		([group, _, groupDiff, __, ___, name, ____, part]) => ({
 			name,
 			part,
-			group: {...group, differentiators: groupDiffs},
+			group: {...group, differentiators: [groupDiff]},
 		})
 	%}
 	# 900552209 "H.-J.-P. Lemm Str., Boizenburg (Elbe)"
 	| text %comma _ text _ differentiator {%
-		([name, _, group, __, groupDiff]) => ({
+		([name, _, __, group, ___, groupDiff]) => ({
 			name,
 			group: {...group, differentiators: [groupDiff]},
 		})
@@ -105,39 +129,39 @@ exp ->
 	# 900048101 "S Grunewald (Berlin)"
 	# 900100001 "S+U Friedrichstr. Bhf (Berlin)"
 	| sbahnUbahn _ text _ differentiator {%
-		([sbahnUbahn, _, name, __, diffs]) => ({
+		([sbahnUbahn, _, name, __, diff]) => ({
 			sbahnUbahn,
-			name, differentiators: diffs,
+			name, differentiators: [diff],
 		})
 	%}
 	# 900245027 "S Blankenfelde (TF) Bhf"
 	| sbahnUbahn _ text _ differentiator _ bhf {%
-		([sbahnUbahn, _, name, __, diffs, ___, bhf]) => ({
+		([sbahnUbahn, _, name, __, diff, ___, bhf]) => ({
 			sbahnUbahn,
-			name, differentiators: diffs,
+			name, differentiators: [diff],
 			bhf,
 		})
 	%}
 	# 900078272 "S+U Neukölln (Berlin) [U7]"
 	# 900100722 "S+U Potsdamer Platz (Bln) [Bus Stresemannstr.]"
 	| sbahnUbahn _ text _ differentiator _ part {%
-		([sbahnUbahn, _, name, __, diffs, ___, part]) => ({
+		([sbahnUbahn, _, name, __, diff, ___, part]) => ({
 			sbahnUbahn,
-			name, differentiators: diffs,
+			name, differentiators: [diff],
 			part,
 		})
 	%}
 	# 900110728 "Michelangelostr. (Berlin) [Bushafen]"
 	| text _ differentiator _ part {%
-		([name, _, diffs, __, part]) => ({
-			name, differentiators: diffs,
+		([name, _, diff, __, part]) => ({
+			name, differentiators: [diff],
 			part,
 		})
 	%}
 	# 900150011 "Hohenschönhauser Str. [1-2] (Berlin)"
 	| text _ part _ differentiator {%
-		([name, _, part, __, diffs]) => ({
-			name, differentiators: diffs,
+		([name, _, part, __, diff]) => ({
+			name, differentiators: [diff],
 			part,
 		})
 	%}
@@ -151,9 +175,9 @@ exp ->
 	%}
 	# 900058103 "S+U Yorckstr. S2 S25 S26 U7 (Berlin)"
 	| sbahnUbahn _ text _ part _ differentiator {%
-		([sbahnUbahn, _, name, __, part, ___, diffs]) => ({
+		([sbahnUbahn, _, name, __, part, ___, diff]) => ({
 			sbahnUbahn,
-			name, differentiators: diffs,
+			name, differentiators: [diff],
 			part,
 		})
 	%}
@@ -192,37 +216,37 @@ exp ->
 	| text %comma _ text %comma _ text {%
 		([group, _, __, name, ___, ____, part]) => ({
 			name,
-			part,
+			part: [part],
 			group,
 		})
 	%}
 
 differentiator ->
 	  %lParen %licensePlate %rParen {%
-			([_, licPl]) => licPl
+			([_, licPl]) => asDifferentiator(licPl)
 		%}
 	| %lParen %differentiator %dot:? %rParen {%
-			([_, diff]) => diff
+			([_, diff]) => asDifferentiator(diff)
 		%}
 	| %lParen %differentiator %dot:? {%
-			([_, diff]) => diff
+			([_, diff]) => asDifferentiator(diff)
 		%}
 	| %lParen %atNotation _ %licensePlate %rParen {%
-			([_, at, space, licPl]) => combineAtNotation([at, space, licPl], licPl)
+			([_, at, space, licPl]) => combineAtNotation([at, space, licPl], _id([licPl]))
 		%}
 	| %lParen %atNotation _ %differentiator %dot:? %rParen {%
-			([_, at, space, diff, dot]) => combineAtNotation([at, space, diff, dot], diff)
+			([_, at, space, diff, dot]) => combineAtNotation([at, space, diff, dot], _id([diff]))
 		%}
 	| %atNotation _ %differentiator %dot:? {%
-			([at, space, diff, dot]) => combineAtNotation([at, space, diff, dot], diff)
+			([at, space, diff, dot]) => combineAtNotation([at, space, diff, dot], _id([diff]))
 		%}
 	| %atNotation _ %word {%
-			([at, space, word]) => combineAtNotation([at, space, word], word)
+			([at, space, word]) => combineAtNotation([at, space, word], _id([word]))
 		%}
 
 # todo: rename to English, but not to "station"
 bhf ->
-	%station {% id %}
+	%station {% _id %}
 
 part ->
 		%lBracket %station %rBracket {%
@@ -232,10 +256,10 @@ part ->
 			([_, line]) => [line]
 		%}
 	| (%lBracket | %lParen) words (%rBracket | %rParen) {%
-			([_, words]) => words
+			([_, words]) => [words]
 		%}
 	| %lBracket words {%
-			([_, words]) => words
+			([_, words]) => [words]
 		%}
 	| lines {% id %}
 
@@ -247,8 +271,8 @@ lines ->
 			([line, _, lines]) => [line, ...lines]
 		%}
 line ->
-	  %ubahnLine {% id %}
-	| %sbahnLine {% id %}
+	  %ubahnLine {% asLine %}
+	| %sbahnLine {% asLine %}
 
 text ->
 		word _ text {% collapseText %} # space is optional because of `A.-B.`
@@ -267,9 +291,9 @@ word ->
 
 # todo: find a better name, e.g. "modesOfTransport" or "products"
 sbahnUbahn ->
-	  %sbahnUbahn {% id %}
-	| %sbahn {% id %}
-	| %ubahn {% id %}
+	  %sbahnUbahn {% asSbahnUbahn %}
+	| %sbahn {% asSbahnUbahn %}
+	| %ubahn {% asSbahnUbahn %}
 
 words ->
 		%word _ words {% collapseText %}
