@@ -22,8 +22,21 @@ const parseVbbStationName = (name) => {
 		err.results = parser.results
 		throw err
 	}
+	const res = parser.results[0]
 
-	return parser.results[0]
+	// remove group name from name
+	// (not sure if this messes some names up)
+	const g = res.group
+	const n = res.name
+	if (g && g.text && n && n.text && n.text.slice(0, g.text.length + 1) === g.text + ' ') {
+		n.text = n.text.slice(g.text.length + 1)
+	}
+	// this assumes that .value works just like .text
+	if (g && g.value && n && n.value && n.value.slice(0, g.value.length + 1) === g.value + ' ') {
+		n.value = n.value.slice(g.value.length + 1)
+	}
+
+	return res
 }
 
 module.exports = parseVbbStationName

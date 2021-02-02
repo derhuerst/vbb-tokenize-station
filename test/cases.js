@@ -513,7 +513,7 @@ const testCases = [
 		},
 	}],
 	['900553022', 'Pampow Stralendorfer Str., Pampow b Schwerin (Meck', {
-		name: text(0, 'Pampow Stralendorfer Str.'),
+		name: text(0, 'Stralendorfer Str.'),
 		group: {
 			...text(27, 'Pampow'),
 			differentiators: [
